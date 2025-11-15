@@ -6,6 +6,18 @@
 <body>
   <h1>Chào mừng đến ZTV SHOW</h1>
   <p>Phát sóng trực tiếp từ GitHub Pages!</p>
-  <iframe src="rtmp://192.168.1.2:1935/hls/mystream.m3u8" width="640" height="360" allowfullscreen></iframe>
+  <video id="video" controls width="640" height="360"></video>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+  if (Hls.isSupported()) {
+    var video = document.getElementById('video');
+    var hls = new Hls();
+    hls.loadSource('rtmp://192.168.1.2:1935/hls/mystream.m3u8'); // thay bằng domain tunnel của bạn
+    hls.attachMedia(video);
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = 'rtmp://192.168.1.2:1935/hls/mystream.m3u8';
+  }
+</script>
+
 </body>
 </html>
